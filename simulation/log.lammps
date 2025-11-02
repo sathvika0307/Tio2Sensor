@@ -1,0 +1,118 @@
+LAMMPS (22 Jul 2025 - Update 1)
+
+# LAMMPS input for doped TiO2 methane adsorption
+
+units metal
+atom_style atomic
+boundary p p p
+
+read_data doped_adsorption.lammps
+Reading data file ...
+  orthogonal box = (0 0 0) to (37.85 37.85 95.14)
+  1 by 1 by 1 MPI processor grid
+  reading atoms ...
+  186 atoms
+  read_data CPU = 0.001 seconds
+
+# Masses
+mass 1 12.0  # C
+mass 2 1.0   # H
+mass 3 16.0  # O
+mass 4 48.0  # Ti
+mass 5 58.93 # Co
+
+pair_style lj/cut 10.0
+pair_coeff * * 0.1 3.0
+
+minimize 1e-4 1e-6 1000 1000
+Generated 0 of 10 mixed pair_coeff terms from geometric mixing rule
+Neighbor list info ...
+  update: every = 1 steps, delay = 0 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 12
+  ghost atom cutoff = 12
+  binsize = 6, bins = 7 7 16
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 4.195 | 4.195 | 4.195 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press     
+         0   0              894504.14      0              894504.14      42136954     
+       230   0             -105.74011      0             -105.74011     -5.2201966    
+Loop time of 0.0501254 on 1 procs for 230 steps with 186 atoms
+
+98.7% CPU use with 1 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = energy tolerance
+  Energy initial, next-to-last, final = 
+       894504.14209167  -105.729649416109  -105.740113510569
+  Force two-norm initial, final = 2477257.7 0.22545423
+  Force max component initial, final = 858243.35 0.064550517
+  Final line search alpha, max atom move = 1 0.064550517
+  Iterations, force evaluations = 230 319
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.044689   | 0.044689   | 0.044689   |   0.0 | 89.15
+Neigh   | 0.0031428  | 0.0031428  | 0.0031428  |   0.0 |  6.27
+Comm    | 0.00017515 | 0.00017515 | 0.00017515 |   0.0 |  0.35
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.002119   |            |       |  4.23
+
+Nlocal:            186 ave         186 max         186 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:             69 ave          69 max          69 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:          10260 ave       10260 max       10260 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 10260
+Ave neighs/atom = 55.16129
+Neighbor list builds = 17
+Dangerous builds = 0
+
+timestep 0.001
+fix 1 all nvt temp 100 100 0.1
+run 1000
+Generated 0 of 10 mixed pair_coeff terms from geometric mixing rule
+Per MPI rank memory allocation (min/avg/max) = 3.07 | 3.07 | 3.07 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press     
+       230   0             -105.74011      0             -105.74011     -5.2201966    
+      1230   96.174855     -103.73754      0             -101.4377       19.516378    
+Loop time of 0.0934924 on 1 procs for 1000 steps with 186 atoms
+
+Performance: 924.139 ns/day, 0.026 hours/ns, 10696.055 timesteps/s, 1.989 Matom-step/s
+98.4% CPU use with 1 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.089101   | 0.089101   | 0.089101   |   0.0 | 95.30
+Neigh   | 0.00057813 | 0.00057813 | 0.00057813 |   0.0 |  0.62
+Comm    | 0.00035835 | 0.00035835 | 0.00035835 |   0.0 |  0.38
+Output  | 1.5208e-05 | 1.5208e-05 | 1.5208e-05 |   0.0 |  0.02
+Modify  | 0.0028978  | 0.0028978  | 0.0028978  |   0.0 |  3.10
+Other   |            | 0.0005421  |            |       |  0.58
+
+Nlocal:            186 ave         186 max         186 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:             68 ave          68 max          68 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:          10240 ave       10240 max       10240 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 10240
+Ave neighs/atom = 55.053763
+Neighbor list builds = 3
+Dangerous builds = 0
+
+compute pe all pe
+thermo_style custom step temp pe
+thermo 100
+Total wall time: 0:00:00
