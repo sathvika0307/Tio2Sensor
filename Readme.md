@@ -68,5 +68,39 @@ This project aims to develop tools for the synthesis, characterization, and meth
 
 **Technologies:** Python, Scikit-learn, TensorFlow, Optuna.
 
+### Plan 5: ZnO Nanoparticle Simulation Tool (New Extension)
+**Objective:** Simulate ZnO nanoparticle synthesis, structure, doping mechanisms, various formations, and methane adsorption/sensing to optimize for low-temperature methane detection, comparing with TiO2.
+
+**Execution Process:**
+1. Research and select simulation software (e.g., LAMMPS for MD, Quantum ESPRESSO for DFT).
+2. Set up computational environment (install software, configure HPC if needed).
+3. Model pristine ZnO crystal structure (wurtzite phase) and nanoparticle formation.
+4. Implement doping mechanisms (e.g., metal dopants like Ag, Cu).
+5. Explore different formations (sizes, shapes, phases).
+6. Simulate methane adsorption and sensing response (binding energies, charge transfer, resistance modeling).
+7. Compare with TiO2 and existing best performers (literature review and benchmarking).
+8. Validate models against experimental data.
+9. Create visualization and analysis scripts for optimization.
+
+**Technologies:** Python, ASE, Matplotlib, NumPy, LAMMPS.
+
+**Execution Status:** Completed basic MD adsorption simulation; binding energy -1.83 eV.
+
+### Comparison: ZnO vs TiO2 for Methane Sensing
+
+| Aspect | TiO2 | ZnO |
+|--------|------|-----|
+| **Crystal Structure** | Anatase (tetragonal)/Rutile | Wurtzite (hexagonal) |
+| **Bandgap** | ~3.2 eV | ~3.4 eV |
+| **Semiconductor Type** | n-type | n-type |
+| **Sensing Mechanism** | Oxygen adsorption/desorption; resistance change on gas exposure | Similar, but higher sensitivity due to polar surfaces; better at room temp |
+| **Doping Examples** | Pd, Co (catalytic enhancement) | Ag, Cu (improves conductivity and affinity) |
+| **Methane Adsorption (Estimated)** | Binding ~ -103 eV (pristine); improved with Pd | Simulated -1.83 eV (334-atom nanoparticle); potentially stronger with real potentials |
+| **Advantages** | Stable, tunable phases | Lower operating temp, higher selectivity for reducing gases |
+| **Disadvantages** | Needs higher temp for activation | Less stable in humid environments |
+| **Simulation Status** | Completed basic MD for TiO2; Pd-doped promising | Planned; expect better low-temp performance |
+
+ZnO may outperform TiO2 in low-temperature methane sensing due to its polar nature, but TiO2 is more phase-diverse for optimization.
+
 ## Next Steps
-Select a plan to implement or combine elements from multiple plans.
+Select a plan to implement or combine elements from multiple plans. Start ZnO simulations by adapting TiO2 scripts.
