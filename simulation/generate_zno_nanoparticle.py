@@ -38,5 +38,5 @@ radius = 10  # in Angstroms
 np_particle = create_nanoparticle(bulk_wurtzite, radius)
 
 # Save to file
-write('zno_nanoparticle.xyz', np_particle)
+write('zno_nanoparticle.xyz', np_particle, format='xyz')
 print(f"Created ZnO nanoparticle with {len(np_particle)} atoms")

@@ -1,46 +1,37 @@
-import os
-import matplotlib
-matplotlib.use('Agg')
+from ase.io import read
+from ase.visualize import view
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-from ase.io import read
 
-# Directory with XYZ files
-xyz_dir = 'simulation'
+# Load TiO2 nanoparticle
+tio2 = read('simulation/tio2_nanoparticle.xyz')
 
-# Function to generate 3D image for XYZ file
-def generate_3d_image(xyz_file, output_png):
-    atoms = read(os.path.join(xyz_dir, xyz_file))
-    positions = atoms.positions
-    symbols = atoms.symbols
+# Load ZnO nanoparticle
+zno = read('zno_nanoparticle.xyz')
 
-    fig = plt.figure()
+# Function to plot 3D structure
+def plot_structure(atoms, title, filename):
+    fig = plt.figure(figsize=(8, 6))
     ax = fig.add_subplot(111, projection='3d')
-
-    # Color map for elements
-    colors = {'Ti': 'blue', 'O': 'red', 'C': 'black', 'H': 'gray', 'Co': 'green'}
-
-    for pos, sym in zip(positions, symbols):
-        color = colors.get(sym, 'purple')
-        ax.scatter(pos[0], pos[1], pos[2], color=color, s=50)
-
-    ax.set_xlabel('X')
-    ax.set_ylabel('Y')
-    ax.set_zlabel('Z')
-    ax.set_title(f'3D Structure: {xyz_file.replace(".xyz", "")}')
-
-    plt.savefig(output_png)
+    symbols = atoms.get_chemical_symbols()
+    positions = atoms.get_positions()
+    colors = {'Ti': 'blue', 'O': 'red', 'Zn': 'green'}
+    for sym, pos in zip(symbols, positions):
+        ax.scatter(pos[0], pos[1], pos[2], c=colors.get(sym, 'black'), s=50)
+    ax.set_xlabel('X (Å)')
+    ax.set_ylabel('Y (Å)')
+    ax.set_zlabel('Z (Å)')
+    ax.set_title(title)
+    # Manual legend
+    handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=c, markersize=10) for c in colors.values()]
+    ax.legend(handles, colors.keys())
+    plt.savefig(filename)
     plt.close()
 
-# List of XYZ files
-xyz_files = ['tio2_nanoparticle.xyz', 'tio2_co_doped.xyz', 'tio2_size_5A.xyz', 'tio2_size_10A.xyz', 'tio2_size_15A.xyz']
+# Plot TiO2
+plot_structure(tio2, 'TiO2 Nanoparticle (181 atoms)', 'tio2_structure.png')
 
-# Generate images
-for xyz_file in xyz_files:
-    if os.path.exists(os.path.join(xyz_dir, xyz_file)):
-        output_png = xyz_file.replace('.xyz', '.png')
-        generate_3d_image(xyz_file, output_png)
-        print(f"Generated {output_png}")
+# Plot ZnO
+plot_structure(zno, 'ZnO Nanoparticle (334 atoms)', 'zno_structure.png')
 
-# For LAMMPS simulations, since no dump files, note that
-print("Note: LAMMPS simulations did not produce dump files for visualization. Use XYZ files for structures.")
+print("Generated structure images: tio2_structure.png, zno_structure.png")

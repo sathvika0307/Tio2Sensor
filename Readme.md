@@ -86,6 +86,23 @@ This project aims to develop tools for the synthesis, characterization, and meth
 
 **Execution Status:** Completed basic MD adsorption simulation; binding energy -1.83 eV.
 
+### Plan 6: TiO2 Doped with Zn Nanoparticle Simulation (New Extension)
+**Objective:** Simulate TiO2 nanoparticle synthesis, structure, Zn doping at different molarities, and methane adsorption/sensing for low-temperature methane detection, comparing with pristine TiO2 and ZnO.
+
+**Execution Process:**
+1. Research Zn doping in TiO2 (effects on bandgap, sensing).
+2. Model pristine TiO2 anatase structure and nanoparticle formation.
+3. Implement Zn doping at varying molarities (e.g., 1%, 5%, 10% Zn atoms replacing Ti).
+4. Explore different nanoparticle sizes and Zn distributions.
+5. Simulate methane adsorption and sensing response (binding energies, charge transfer).
+6. Compare with pristine TiO2 and ZnO benchmarks.
+7. Validate against literature on Zn-doped TiO2 sensors.
+8. Analyze molarity effects on performance.
+
+**Technologies:** Python, ASE, Matplotlib, NumPy, LAMMPS.
+
+**Execution Status:** Planned. Adapt doping scripts for Zn in TiO2 lattice.
+
 ### Comparison: ZnO vs TiO2 for Methane Sensing
 
 | Aspect | TiO2 | ZnO |
